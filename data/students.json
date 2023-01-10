@@ -1,0 +1,28 @@
+{
+    "metadata": {
+        "student": {
+            "code": "student registration number",
+            "name": "full name",
+            "sex": "male or female",
+            "year_enrolled": "the year started at the school as a student",
+            "form_enrolled": "class he or she started at the school",
+            "current_form": "class he or she is currently",
+            "phone": "contact details for guardian",
+            "password": "password for the student",
+            "status": "can be (present, transfered, graduated, suspended, withdrew, dismissed)"
+        }
+    },
+    "students": [
+        {
+            "code": "",
+            "name": "",
+            "sex": "",
+            "year_enrolled": "",
+            "form_enrolled": "",
+            "current_form": "",
+            "phone": "",
+            "password": "",
+            "status": ""
+        }
+    ]
+}

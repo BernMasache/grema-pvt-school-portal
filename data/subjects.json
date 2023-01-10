@@ -1,0 +1,12 @@
+{
+    "metadata":{
+        "code":"first three characters of the subject's name",
+        "name":"full name of the subject"
+    },
+    "subjects":[
+        {
+            "code":"",
+            "name":""
+        }
+    ]
+}
