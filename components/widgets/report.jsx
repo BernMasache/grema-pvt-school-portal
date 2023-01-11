@@ -1,82 +1,3 @@
-const plans = [
-    {
-        id: 1,
-        name: 'Hobby',
-        memory: '4 GB RAM',
-        cpu: '4 CPUs',
-        storage: '128 GB SSD disk',
-        price: '$40',
-        isCurrent: false,
-        grades: [{ subj: "", value: 0 }]
-    },
-    {
-        id: 2,
-        name: 'Startup',
-        memory: '8 GB RAM',
-        cpu: '6 CPUs',
-        storage: '256 GB SSD disk',
-        price: '$80',
-        isCurrent: true,
-    },
-    {
-        id: 1,
-        name: 'Hobby',
-        memory: '4 GB RAM',
-        cpu: '4 CPUs',
-        storage: '128 GB SSD disk',
-        price: '$40',
-        isCurrent: false,
-        grades: [{ subj: "", value: 0 }]
-    },
-    {
-        id: 2,
-        name: 'Startup',
-        memory: '8 GB RAM',
-        cpu: '6 CPUs',
-        storage: '256 GB SSD disk',
-        price: '$80',
-        isCurrent: true,
-    },
-    {
-        id: 1,
-        name: 'Hobby',
-        memory: '4 GB RAM',
-        cpu: '4 CPUs',
-        storage: '128 GB SSD disk',
-        price: '$40',
-        isCurrent: false,
-        grades: [{ subj: "", value: 0 }]
-    },
-    {
-        id: 2,
-        name: 'Startup',
-        memory: '8 GB RAM',
-        cpu: '6 CPUs',
-        storage: '256 GB SSD disk',
-        price: '$80',
-        isCurrent: true,
-    },
-    {
-        id: 1,
-        name: 'Hobby',
-        memory: '4 GB RAM',
-        cpu: '4 CPUs',
-        storage: '128 GB SSD disk',
-        price: '$40',
-        isCurrent: false,
-        grades: [{ subj: "", value: 0 }]
-    },
-    {
-        id: 2,
-        name: 'Startup',
-        memory: '8 GB RAM',
-        cpu: '6 CPUs',
-        storage: '256 GB SSD disk',
-        price: '$80',
-        isCurrent: true,
-    },
-]
-
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
@@ -107,10 +28,6 @@ class SchoolReportTemplate extends React.Component {
         this.setState({ open: false })
     };
 
-    // handlePdf = () => {
-
-    // }
-
     generatePDF = () => {
 
         const report = new JsPDF('l', 'pt', 'a4');
@@ -118,7 +35,16 @@ class SchoolReportTemplate extends React.Component {
             report.save('report.pdf');
         })
     }
-
+    pointValueSet = (grade) => {
+        return this.props.pointValueSet(grade)
+    }
+    gradePassMark = (grade) => {
+        if (grade >= 40 && grade <= 100) {
+            return "Pass"
+        } else {
+            return "Fail"
+        }
+    }
     //Render
     render() {
         return (
@@ -171,7 +97,7 @@ class SchoolReportTemplate extends React.Component {
 
                                                     {/* table results */}
                                                     <div className="px-4 sm:px-6 lg:px-8">
-                  
+
 
                                                         <div className="-mx-4 mt-10 ring-1 ring-gray-300 bg-slate-100 sm:-mx-6 md:mx-0 md:rounded-lg" id='report'>
                                                             <div className="sm:flex p-4 sm:items-center">
@@ -181,7 +107,7 @@ class SchoolReportTemplate extends React.Component {
                                                                         End of term 2 exams, 2022
                                                                     </p>
                                                                     <p className="mt-2 text-xl text-gray-700">
-                                                                        GREMA Pvt Sec School
+                                                                        Bernard Academy
                                                                     </p>
                                                                 </div>
                                                                 <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -224,8 +150,8 @@ class SchoolReportTemplate extends React.Component {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    {plans.map((plan, planIdx) => (
-                                                                        <tr key={plan.id}>
+                                                                    {this.props.grades && Object.keys(this.props.grades).map((grade, planIdx) => (
+                                                                        <tr key={planIdx}>
                                                                             <td
                                                                                 className={classNames(
                                                                                     planIdx === 0 ? '' : 'border-t border-transparent',
@@ -233,15 +159,13 @@ class SchoolReportTemplate extends React.Component {
                                                                                 )}
                                                                             >
                                                                                 <div className="font-medium text-gray-900">
-                                                                                    {plan.name}
-                                                                                    {plan.isCurrent ? <span className="ml-1 text-indigo-600">(Current Plan)</span> : null}
+                                                                                    {grade.toUpperCase()}
                                                                                 </div>
                                                                                 <div className="mt-1 flex flex-col text-gray-500 sm:block lg:hidden">
                                                                                     <span>
-                                                                                        {plan.memory} / {plan.cpu}
+                                                                                        {this.props.grades[grade]}
                                                                                     </span>
-                                                                                    <span className="hidden sm:inline">·</span>
-                                                                                    <span>{plan.storage}</span>
+
                                                                                 </div>
                                                                                 {planIdx !== 0 ? <div className="absolute right-0 left-6 -top-px h-px bg-gray-200" /> : null}
                                                                             </td>
@@ -251,7 +175,7 @@ class SchoolReportTemplate extends React.Component {
                                                                                     'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
                                                                                 )}
                                                                             >
-                                                                                {plan.memory}
+                                                                                {this.props.grades[grade]}
                                                                             </td>
                                                                             <td
                                                                                 className={classNames(
@@ -259,7 +183,7 @@ class SchoolReportTemplate extends React.Component {
                                                                                     'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
                                                                                 )}
                                                                             >
-                                                                                {plan.cpu}
+                                                                                {this.pointValueSet(this.props.grades[grade])}
                                                                             </td>
                                                                             <td
                                                                                 className={classNames(
@@ -267,39 +191,39 @@ class SchoolReportTemplate extends React.Component {
                                                                                     'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
                                                                                 )}
                                                                             >
-                                                                                {plan.storage}
+                                                                                {this.gradePassMark(this.props.grades[grade])}
                                                                             </td>
 
                                                                         </tr>
 
                                                                     ))}
                                                                     <tr className=''>
-                                                                       
-                                                                            
-                                                                            <th
-                                                                                scope="col"
-                                                                                className="hidden px-3 py-3.5 text-end text-xl font-semibold text-gray-900 lg:table-cell"
-                                                                            >
-                                                                              Total
-                                                                            </th>
-                                                                            <th
-                                                                                scope="col"
-                                                                                className="hidden bg-gray-300 px-3 py-3.5 text-left text-xl font-semibold text-gray-900 lg:table-cell"
-                                                                            >
-                                                                                21
-                                                                            </th>
-                                                                            <th
-                                                                                scope="col"
-                                                                                className="hidden bg-gray-300 px-3 py-3.5 text-left text-xl font-semibold text-gray-900 lg:table-cell"
-                                                                            >
-                                                                                21
-                                                                            </th>
-                                                                            <th
-                                                                                scope="col"
-                                                                                className="hidden bg-gray-300 px-3 py-3.5 text-left text-xl font-semibold text-gray-900 lg:table-cell"
-                                                                            >
-                                                                                Passed
-                                                                            </th>
+
+
+                                                                        <th
+                                                                            scope="col"
+                                                                            className="hidden px-3 py-3.5 text-end text-xl font-semibold text-gray-900 lg:table-cell"
+                                                                        >
+                                                                            Total
+                                                                        </th>
+                                                                        <th
+                                                                            scope="col"
+                                                                            className="hidden bg-gray-300 px-3 py-3.5 text-left text-xl font-semibold text-gray-900 lg:table-cell"
+                                                                        >
+                                                                            {this.props.totaGrades}
+                                                                        </th>
+                                                                        <th
+                                                                            scope="col"
+                                                                            className="hidden bg-gray-300 px-3 py-3.5 text-left text-xl font-semibold text-gray-900 lg:table-cell"
+                                                                        >
+                                                                            {this.props.points}
+                                                                        </th>
+                                                                        <th
+                                                                            scope="col"
+                                                                            className="hidden bg-gray-300 px-3 py-3.5 text-left text-xl font-semibold text-gray-900 lg:table-cell"
+                                                                        >
+                                                                            {this.props.passRemark}
+                                                                        </th>
 
                                                                     </tr>
                                                                 </tbody>

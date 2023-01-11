@@ -9,12 +9,53 @@
     },
     "grades": [
         {
-            "studentCode": "",
-            "subjectCode": "",
+            "studentCode": "BG097",
             "term": 1,
             "form": 1,
-            "academicYear": "",
-            "value": 0
+            "academicYear": "2022-2023",
+            "values": {
+                "mat":88,
+                "chi":70,
+                "bio":91,
+                "eng":34,
+                "phy":69,
+                "che":72,
+                "geo":83,
+                "com":92
+            }
+        },
+        {
+            "studentCode": "BG098",
+            "term": 1,
+            "form": 1,
+            "academicYear": "2022-2023",
+            "values": {
+                "mat":50,
+                "chi":61,
+                "bio":64,
+                "eng":64,
+                "phy":71,
+                "che":65,
+                "geo":83,
+                "com":74
+            }
+        },
+        {
+            "studentCode": "BA121",
+            "term": 1,
+            "form": 1,
+            "academicYear": "2022-2023",
+            "values": {
+                "mat":56,
+                "chi":90,
+                "bio":71,
+                "eng":87,
+                "phy":63,
+                "che":66,
+                "geo":73,
+                "com":70
+            }
         }
+        
     ]
 }

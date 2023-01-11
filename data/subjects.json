@@ -5,8 +5,68 @@
     },
     "subjects":[
         {
-            "code":"",
-            "name":""
+            "code":"agr",
+            "name":"Agriculture"
+        },
+        {
+            "code":"bkn",
+            "name":"Bible Knowledge"
+        },
+        {
+            "code":"bus",
+            "name":"Business Studies"
+        },
+        {
+            "code":"bio",
+            "name":"Biology"
+        },
+        {
+            "code":"chi",
+            "name":"Chichewa"
+        },
+        {
+            "code":"com",
+            "name":"Computer Studies"
+        },
+        {
+            "code":"che",
+            "name":"Chemistry"
+        },
+        {
+            "code":"his",
+            "name":"History"
+        }, {
+            "code":"geo",
+            "name":"Geography"
+        },
+        {
+            "code":"eng",
+            "name":"English"
+        },
+        {
+            "code":"mat",
+            "name":"Mathematics"
+        },
+        {
+            "code":"adm",
+            "name":"addition Mathematics"
+        },
+        {
+            "code":"phy",
+            "name":"Physics"
+        },
+        {
+            "code":"soc",
+            "name":"Social Studies"
+        },
+        {
+            "code":"sod",
+            "name":"Social and Development Studies"
+        },
+        {
+            "code":"lsk",
+            "name":"Lifeskills"
         }
+        
     ]
 }

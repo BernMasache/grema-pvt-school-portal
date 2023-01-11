@@ -14,15 +14,48 @@
     },
     "students": [
         {
-            "code": "",
-            "name": "",
-            "sex": "",
-            "year_enrolled": "",
-            "form_enrolled": "",
-            "current_form": "",
-            "phone": "",
-            "password": "",
-            "status": ""
+            "code": "BG098",
+            "name": "Mike Markson",
+            "sex": "Male",
+            "year_enrolled": "2021",
+            "form_enrolled": "2",
+            "current_form": "4",
+            "phone": "0989876748",
+            "password": "098765567890",
+            "status": "present"
+        },
+        {
+            "code": "BG097",
+            "name": "Alinafe Falani",
+            "sex": "Male",
+            "year_enrolled": "2020",
+            "form_enrolled": "1",
+            "current_form": "4",
+            "phone": "09898729812",
+            "password": "ytdnbhg127",
+            "status": "present"
+        },
+        {
+            "code": "BA121",
+            "name": "Khalidwe Damba",
+            "sex": "Male",
+            "year_enrolled": "2022",
+            "form_enrolled": "1",
+            "current_form": "2",
+            "phone": "0678762789",
+            "password": "jhgvgk12",
+            "status": "present"
+        },
+        {
+            "code": "BK291",
+            "name": "Satiel Holace",
+            "sex": "Male",
+            "year_enrolled": "2022",
+            "form_enrolled": "1",
+            "current_form": "2",
+            "phone": "099878987",
+            "password": "798jhhjgjy87",
+            "status": "present"
         }
     ]
 }
