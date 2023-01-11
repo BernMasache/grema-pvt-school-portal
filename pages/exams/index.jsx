@@ -15,11 +15,13 @@ class Index extends React.Component {
     }
     componentDidMount() {
         this.studentGradesList()
+        this.studentsGradesList()
+
     }
 
 
     studentGradesList = () => {
-        gradesStore.get("BG097",1,1,"2022-2023").then(data => {
+        gradesStore.get("BA121",1,1,"2022-2023").then(data => {
             this.setState({
                 grades: data
             })

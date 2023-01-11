@@ -24,7 +24,8 @@ const ResultsTemplate = (props) => {
 
         return total
     }
-
+    console.log(props.allGrades);
+    
     const pointValue = (grade) => {
         if (grade >= 85 && grade <= 100) {
             return 1
@@ -79,11 +80,10 @@ const ResultsTemplate = (props) => {
         let total = 0
         grades.length > 0 ? grades.map(dd => {
             let allGrades = grades && Object.values(dd.values)
-            allGrades.map(grade => {
+            allGrades.sort().reverse().slice(0, 6).map(grade => {
                 total += pointValue(grade)
             })
         }) : null
-
         return total
     }
 

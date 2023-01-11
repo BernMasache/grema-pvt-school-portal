@@ -150,7 +150,7 @@ class SchoolReportTemplate extends React.Component {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    {this.props.grades && Object.keys(this.props.grades).map((grade, planIdx) => (
+                                                                    {this.props.grades && Object.keys(this.props.grades).sort().map((grade, planIdx) => (
                                                                         <tr key={planIdx}>
                                                                             <td
                                                                                 className={classNames(
