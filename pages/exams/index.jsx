@@ -19,7 +19,6 @@ class Index extends React.Component {
 
     }
 
-
     studentGradesList = () => {
         gradesStore.get("BA121",1,1,"2022-2023").then(data => {
             this.setState({

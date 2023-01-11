@@ -9,7 +9,6 @@ export default class useGradesStore {
         if (code == null && term == null && form == null && year == null) {
             return await gradesService.get().then((result => {
                 if (result) {
-
                     return result
                 }
             })).catch(error => {
@@ -19,7 +18,6 @@ export default class useGradesStore {
         else {
             return await gradesService.get(code, term, form, year).then((result => {
                 if (result) {
-
                     var response = result.grades.filter(item => {
                         return item.studentCode == code;
                     });
