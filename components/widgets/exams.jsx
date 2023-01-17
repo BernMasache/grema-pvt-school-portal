@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { useState } from "react"
 import SchoolReportTemplate from "./report"
+import SchoolReport from "./schoolReport"
+import SchoolReportFrame from "./schoolReport"
 
 const payments = [
     {
@@ -18,14 +20,12 @@ const ResultsTemplate = (props) => {
     const calculateGradesTotal = (grades) => {
         let total = 0
         grades.length > 0 ? grades.map(dd => {
-            let allGrades = grades && Object.values(dd.values)
-            total = allGrades.reduce((a, b) => a + b, 0)
+            total += dd.value
         }) : null
-
         return total
     }
-    console.log(props.allGrades);
-    
+
+
     const pointValue = (grade) => {
         if (grade >= 85 && grade <= 100) {
             return 1
@@ -54,45 +54,62 @@ const ResultsTemplate = (props) => {
     const passRemark = (grades) => {
         let count = 0
         let passfail = ""
-
+        let contain = []
         grades.length > 0 ? grades.map(dd => {
-            let allGrades = grades && Object.values(dd.values)
-
-            let english = grades && dd.values.eng
-
-            allGrades.map(grade => {
-                if (grade >= 40) {
-                    count += 1
-                }
+            contain.push({
+                code: dd.Subject.code,
+                name: dd.Subject.name,
+                value: dd.value,
             })
-
-            if (count >= 6 && english >= 40) {
-                passfail = "Pass"
-            } else {
-                passfail = "Fail"
-            }
         }) : null
+
+        contain.map(grade => {
+            if (grade.value >= 40) {
+                count += 1
+            }
+        })
+
+        let english = 0
+        contain.map(grade => {
+            if (grade.code == "eng") {
+                english = grade.value
+            }
+        })
+
+        if (count >= 6 && english >= 40) {
+            passfail = "Pass"
+        } else {
+            passfail = "Fail"
+        }
 
         return passfail
     }
 
     const points = (grades) => {
         let total = 0
+        let contain = []
         grades.length > 0 ? grades.map(dd => {
-            let allGrades = grades && Object.values(dd.values)
-            allGrades.sort().reverse().slice(0, 6).map(grade => {
-                total += pointValue(grade)
-            })
+            contain.push(dd.value,)
         }) : null
+
+        contain.sort().reverse().slice(0, 6).map(grade => {
+
+            total += pointValue(grade)
+        })
+
         return total
     }
 
     const gradeList = (grades) => {
-        let theGrades = []
+        let contain = []
         grades.length > 0 ? grades.map(dd => {
-            theGrades = dd.values
+            contain.push({
+                value: dd.value,
+                name: dd.Subject.name
+            })
         }) : null
-        return theGrades
+
+        return contain
 
     }
 
@@ -148,7 +165,12 @@ const ResultsTemplate = (props) => {
                                                     </td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                                                         {/* <a href={payment.href} className="text-orange-600 hover:text-orange-900"> */}
-                                                        <SchoolReportTemplate pointValueSet={pointValue} grades={gradeList(props.grades)} totaGrades={calculateGradesTotal(props.grades)} points={points(props.grades)} passRemark={passRemark(props.grades)} />
+                                                        <button>
+                                                            <Link href={"/portal/exams/report"} className="text-green-500">
+                                                                View previous
+                                                            </Link>
+                                                        </button>
+                                                        {/* <SchoolReportFrame pointValueSet={pointValue} grades={gradeList(props.grades)} totaGrades={calculateGradesTotal(props.grades)} points={points(props.grades)} passRemark={passRemark(props.grades)} /> */}
                                                         {/* </a> */}
                                                     </td>
                                                 </tr>
@@ -164,17 +186,11 @@ const ResultsTemplate = (props) => {
                 </div>
 
             </section >
-            <div className="border-b mt-8 border-gray-200 pb-5 sm:flex sm:items-center sm:justify-end">
 
-                <div className="mt-3 mr-4 sm:mt-0 sm:ml-4">
-                    <Link
-                        href="/exams/previous-results"
-                        className="inline-flex items-center rounded-md border border-transparent bg-slate-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Previous Results
-                    </Link>
-                </div>
-            </div>
+            <section className="mt-8">
+                <SchoolReport pointValueSet={pointValue} grades={gradeList(props.grades)} totaGrades={calculateGradesTotal(props.grades)} points={points(props.grades)} passRemark={passRemark(props.grades)}/>
+            </section>
+          
         </div >
     )
 }

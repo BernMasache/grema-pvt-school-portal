@@ -1,13 +1,17 @@
 import axios from 'axios';
-const apiUrl = process.env.NEXT_PUBLIC_API_URL
+const resource = "http://localhost:5000/api/grema";
+import cookie from 'js-cookie';
+
 export default class GradesService {
 
-    get() {
+    getAllGrades() {
         return axios
-            .get(apiUrl+"/api/grades", {
+            .get(resource + "/student/grades/all", {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${JSON.parse(cookie.get('TOKEN'))}`
+
                 }
             })
             .then(response => {
@@ -20,6 +24,25 @@ export default class GradesService {
             });
 
     };
+
+
+    getGrades(data) {
+        return axios.get(`${resource}/grades/${data.term}&${data.form}&${data.year}`, {
+
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(cookie.get('TOKEN'))}`
+
+            }
+        }).then(res => {
+            return res
+        }).catch(e => {
+            if (e) {
+                throw e
+            }
+        })
+    }
 
 
 }

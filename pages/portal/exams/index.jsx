@@ -44,28 +44,19 @@ import { withRouter } from "next/router";
 import Layout from "../../../components/layouts/mainLayout";
 import ProfilePage from "../../../components/widgets/profile"
 import StudentLayout from "../../../components/layouts/student.portal.layout";
-import useStudentStore from "../../../services/store/students.store";
+import ResultsTemplate from "../../../components/widgets/exams";
+import useGradesStore from "../../../services/store/grades.store";
 //STORES , COMPONETS AND FROMS 
 
 
 //INITIALISE
-const studentStore = new useStudentStore()
+const gradesStore = new useGradesStore()
 //PAGE
 class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      //   breadcrumbPages: [
-      //     {
-      //       href: "/admin",
-      //       name: this.props.t('navigation.home', { ns: 'common' })
-      //     },
-      //     {
-      //       href: "#",
-      //       name: this.props.t('pages.users', { ns: 'common' })
-      //     },
-      //   ],
       grades: [],
       allGrades: [],
       roles: [],
@@ -73,21 +64,20 @@ class Page extends React.Component {
 
   }
   componentDidMount() {
-this.studentGrades()
+    this.studentGrades()
   }
   studentGrades = () => {
     let body = {
-      term:1,
-      form:2,
-      year:"2022-2023"
+      term: 1,
+      form: 2,
+      year: "2022-2023"
     }
-    studentStore.getGrades(body).then(data => {
-        this.setState({
-            grades: data
-        })
-        console.log(data);
+    gradesStore.getGrades(body).then(data => {
+      this.setState({
+        grades: data.data.grades
+      })
     })
-}
+  }
   render() {
     return (
       <>
@@ -102,15 +92,12 @@ this.studentGrades()
             </div>
             <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
               Tab 1
-              {/* <CreateUserForm
-                roles={this.state.roles}
-                create={this.createUser}
-                key={componentKey("create-users")} /> */}
+
             </div>
           </div>
           <div className="align-middle inline-block min-w-full min-h-full mt-5" style={{ height: '60vh', minHeight: '200px', width: '100%' }}>
 
-            {/* <ProfilePage/> */}
+            <ResultsTemplate grades={this.state.grades} />
           </div>
         </div>
       </>

@@ -59,6 +59,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import FooterComponent from '../widgets/footer'
 
 const user = {
   name: 'Lisa Marie',
@@ -294,6 +295,7 @@ const MainLayout = ({ children }) => {
             </div>
           </div>
         </main>
+           
       </div>
     </>
   )

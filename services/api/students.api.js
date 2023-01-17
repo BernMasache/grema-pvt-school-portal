@@ -8,23 +8,6 @@ export default class StudentService {
         return user.uuid
     }
 
-    getGrades(data) {
-        return axios.get(`${resource}/grades/${data.term}&${data.form}&${data.year}`, {
-
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${JSON.parse(cookie.get('TOKEN'))}`
-
-            }
-        }).then(res => {
-            return res
-        }).catch(e => {
-            if (e) {
-                throw e
-            }
-        })
-    }
     signin(data) {
         return axios
             .post(resource + "/signin/student", data, {

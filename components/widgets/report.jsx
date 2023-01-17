@@ -21,7 +21,9 @@ class SchoolReportTemplate extends React.Component {
     }
 
     handleOpen = () => {
+
         this.setState({ open: true })
+       
     };
 
     handleClose = () => {
@@ -35,6 +37,7 @@ class SchoolReportTemplate extends React.Component {
             report.save('report.pdf');
         })
     }
+
     pointValueSet = (grade) => {
         return this.props.pointValueSet(grade)
     }
@@ -150,7 +153,7 @@ class SchoolReportTemplate extends React.Component {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    {this.props.grades && Object.keys(this.props.grades).sort().map((grade, planIdx) => (
+                                                                    {this.props.grades.map((grade, planIdx) => (
                                                                         <tr key={planIdx}>
                                                                             <td
                                                                                 className={classNames(
@@ -159,11 +162,11 @@ class SchoolReportTemplate extends React.Component {
                                                                                 )}
                                                                             >
                                                                                 <div className="font-medium text-gray-900">
-                                                                                    {grade.toUpperCase()}
+                                                                                    {grade.name.toUpperCase()}
                                                                                 </div>
                                                                                 <div className="mt-1 flex flex-col text-gray-500 sm:block lg:hidden">
                                                                                     <span>
-                                                                                        {this.props.grades[grade]}
+                                                                                        {/* {this.props.grades.Subject["code"]} */}
                                                                                     </span>
 
                                                                                 </div>
@@ -175,7 +178,7 @@ class SchoolReportTemplate extends React.Component {
                                                                                     'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
                                                                                 )}
                                                                             >
-                                                                                {this.props.grades[grade]}
+                                                                                {grade.value}
                                                                             </td>
                                                                             <td
                                                                                 className={classNames(
@@ -183,7 +186,7 @@ class SchoolReportTemplate extends React.Component {
                                                                                     'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
                                                                                 )}
                                                                             >
-                                                                                {this.pointValueSet(this.props.grades[grade])}
+                                                                                {this.pointValueSet(grade.value)}
                                                                             </td>
                                                                             <td
                                                                                 className={classNames(
@@ -191,7 +194,7 @@ class SchoolReportTemplate extends React.Component {
                                                                                     'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
                                                                                 )}
                                                                             >
-                                                                                {this.gradePassMark(this.props.grades[grade])}
+                                                                                {this.gradePassMark(grade.value)}
                                                                             </td>
 
                                                                         </tr>
@@ -231,7 +234,7 @@ class SchoolReportTemplate extends React.Component {
                                                         </div>
                                                         <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                                                             <button
-                                                                onClick={this.generatePDF}
+                                                                // onClick={this.generatePDF}
                                                                 type="button"
                                                                 className="sr-only inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm capitalize"
 
