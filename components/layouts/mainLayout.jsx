@@ -46,22 +46,22 @@ class LayoutComponet extends React.Component {
 
   navigation() {
     let navList = [
-      { name: "Profile", href: "/profile", icon: HomeIcon, current: false },
+      { name: "Profile", href: "/portal/profile", icon: HomeIcon, current: false },
       {
         name: "Exams Results",
-        href: "/exams",
+        href: "/portal/exams",
         icon: UsersIcon,
         current: false,
       },
       {
         name: "Class Timetable",
-        href: "/time-tables/class",
+        href: "/portal/time-tables/class",
         icon: RectangleGroupIcon,
         current: false,
       },
       {
         name: "Exams Timetable",
-        href: "/time-tables/exams",
+        href: "/portal/time-tables/exams",
         icon: CogIcon,
         current: false,
       },
@@ -308,4 +308,7 @@ class LayoutComponet extends React.Component {
     )
   }
 }
-export default LayoutComponet;
+const LayoutComponetWithRouter = withRouter(LayoutComponet);
+
+export default LayoutComponetWithRouter;
+
