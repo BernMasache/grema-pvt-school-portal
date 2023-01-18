@@ -34,6 +34,7 @@ export default function SchoolReport(props) {
     }
 
     const gradePassMark = (grade) => {
+        
         if (grade >= 40 && grade <= 100) {
             return "Pass"
         } else {
@@ -41,6 +42,10 @@ export default function SchoolReport(props) {
         }
     }
 
+    const getTerm =()=>{
+       
+        return props.term
+    }
 
     return (
         <div className="bg-gray-50">
@@ -56,7 +61,7 @@ export default function SchoolReport(props) {
                                 <>
                                     <dt className="text-lg">
                                         <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-400">
-                                            <span className="font-medium text-gray-900">View</span>
+                                            <span className="font-sm text-gray-600">{props.student.username} term {getTerm()} school report</span>
                                             <span className="ml-6 flex h-7 items-center">
                                                 <ChevronDownIcon
                                                     className={classNames(open ? '-rotate-180' : 'rotate-0', 'h-6 w-6 transform')}
@@ -93,7 +98,7 @@ export default function SchoolReport(props) {
                                                                 {props.grades.length>0? props.grades.map((grade, key) => (
                                                                     <tr key={key}>
                                                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">
-                                                                            {grade.name.toUpperCase()}
+                                                                            {grade.name}
                                                                         </td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                             {grade.value}

@@ -16,7 +16,6 @@ class ProfilePage extends React.Component {
 
     studentsList = () => {
        
-
     }
 
     render() {
@@ -56,7 +55,7 @@ class ProfilePage extends React.Component {
                                 <div className="sm:col-span-2">
                                     <dt className="text-sm font-medium text-gray-500">More Details</dt>
                                     <dd className="mt-1 text-sm text-gray-900">
-                                       You Enrolled in form {this.props.student.formEnrolled} and currently you are {this.props.student.status}
+                                       You Enrolled in form {this.props.student.formEnrolled} and {this.props.student.status} you are in form {this.props.student.currentForm}
                                     </dd>
                                 </div>
 

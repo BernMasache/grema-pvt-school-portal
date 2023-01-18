@@ -16,26 +16,15 @@ export default class useGradesStore {
 
     }
 
-    // allGrades = async (term, form, year) => {
-    //     if (term == null && form == null && year == null) {
-    //         return await gradesService.get().then((result => {
-    //             if (result) {
+    allGrades = async () => {
 
-    //                 return result
-    //             }
-    //         })).catch(error => {
-    //             throw error
-    //         });
-    //     }
-    //     else {
-    //         return await gradesService.get(term, form, year).then((result => {
-    //             if (result) {
-    //                 return result
-    //             }
-    //         })).catch(error => {
-    //             throw error
-    //         });
-    //     }
-    // };
+        return await gradesService.getAllGrades().then((result => {
+            if (result) {
+                return result
+            }
+        })).catch(error => {
+            throw error
+        });
+    }
 }
 

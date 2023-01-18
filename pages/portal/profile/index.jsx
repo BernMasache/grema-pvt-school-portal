@@ -15,16 +15,6 @@ class Page extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      //   breadcrumbPages: [
-      //     {
-      //       href: "/admin",
-      //       name: this.props.t('navigation.home', { ns: 'common' })
-      //     },
-      //     {
-      //       href: "#",
-      //       name: this.props.t('pages.users', { ns: 'common' })
-      //     },
-      //   ],
       student: {},
       roles: [],
     };
@@ -39,8 +29,9 @@ class Page extends React.Component {
     this.setState({
       student: stu
     })
-    return console.log(stu);
+    return stu;
   }
+
   render() {
     return (
       <>
@@ -63,7 +54,7 @@ class Page extends React.Component {
           </div>
           <div className="align-middle inline-block min-w-full min-h-full mt-5" style={{ height: '60vh', minHeight: '200px', width: '100%' }}>
 
-            <ProfilePage student={this.state.student}/>
+            <ProfilePage student={this.state.student} />
           </div>
         </div>
       </>

@@ -3,7 +3,7 @@ import { useState } from "react"
 import SchoolReportTemplate from "./report"
 import SchoolReport from "./schoolReport"
 import SchoolReportFrame from "./schoolReport"
-
+import cookie from "js-cookie"
 const payments = [
     {
         id: 1,
@@ -16,6 +16,8 @@ const payments = [
 ]
 
 const ResultsTemplate = (props) => {
+
+
 
     const calculateGradesTotal = (grades) => {
         let total = 0
@@ -100,6 +102,9 @@ const ResultsTemplate = (props) => {
         return total
     }
 
+    const getTerm =(grades)=>{
+        return grades.length>0?grades[0].term:""
+    }
     const gradeList = (grades) => {
         let contain = []
         grades.length > 0 ? grades.map(dd => {
@@ -120,9 +125,9 @@ const ResultsTemplate = (props) => {
                 <div className="bg-white pt-6 shadow sm:overflow-hidden sm:rounded-md">
                     <div className="px-4 sm:px-6">
                         <h2 id="billing-history-heading" className="text-lg font-medium leading-6 text-gray-900">
-                            {"2023"} End of Term {"1"} examinamtions
+                            {new Date().getFullYear()} End of Term  {getTerm(props.grades)} examinamtions
                         </h2>
-                        <p className="text-xl font-normal leading-2 text-gray-500">Form {"2"}</p>
+                        <p className="text-xl font-normal leading-2 text-gray-500">Form {props.student.currentForm}</p>
                     </div>
                     <div className="mt-6 flex flex-col">
                         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -170,8 +175,7 @@ const ResultsTemplate = (props) => {
                                                                 View previous
                                                             </Link>
                                                         </button>
-                                                        {/* <SchoolReportFrame pointValueSet={pointValue} grades={gradeList(props.grades)} totaGrades={calculateGradesTotal(props.grades)} points={points(props.grades)} passRemark={passRemark(props.grades)} /> */}
-                                                        {/* </a> */}
+                                                        
                                                     </td>
                                                 </tr>
                                             ))}
@@ -188,9 +192,9 @@ const ResultsTemplate = (props) => {
             </section >
 
             <section className="mt-8">
-                <SchoolReport pointValueSet={pointValue} grades={gradeList(props.grades)} totaGrades={calculateGradesTotal(props.grades)} points={points(props.grades)} passRemark={passRemark(props.grades)}/>
+                <SchoolReport term={getTerm(props.grades)} student={props.student} pointValueSet={pointValue} grades={gradeList(props.grades)} totaGrades={calculateGradesTotal(props.grades)} points={points(props.grades)} passRemark={passRemark(props.grades)} />
             </section>
-          
+
         </div >
     )
 }
