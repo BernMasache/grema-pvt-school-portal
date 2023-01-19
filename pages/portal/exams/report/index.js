@@ -36,7 +36,7 @@ class Page extends React.Component {
     return (
       <>
         {/* <LoadingWidget loading={this.state.loading} /> */}
-        <div className="max-w-2xl mx-auto px-2 sm:px-6 lg:max-w-5xl lg:px-2">
+        <div className="max-w-2xl mx-auto px-2 sm:px-6 lg:max-w-7xl lg:px-2">
           <div>
             {/* <BreadcrumbWidget breadcrumbs={this.state.breadcrumbPages} /> */}
           </div>

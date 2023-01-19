@@ -86,42 +86,49 @@ export default function PreviousResults(props) {
   const getGrades = (grades) => {
     let accYear = []
     let terms = []
-
+    let subjects = []
     let forms = []
     grades.grades == undefined ? "" : grades.grades.map(grade => {
       accYear.push(grade.academicYear)
       terms.push(grade.term)
       forms.push(grade.form)
-
+      subjects.push(grade.Subject)
     })
-    return { accYear, terms, forms }
+
+    return { subjects, accYear, terms, forms, grades: grades.grades }
   }
 
   const terms = (data) => {
 
-    // let uniqueChars = data.filter((c, index) => {
-    //   return chars.indexOf(c) === index;
-    // });
-
     let term = [...new Set(data.terms)]
- 
+
     return term
   }
 
   const forms = (data) => {
 
     let allForms = [...new Set(data.forms)]
- 
+    
     return allForms
   }
 
   const academicYears = (data) => {
-
+   
     let accYears = [...new Set(data.accYear)]
- 
+
     return accYears
   }
 
+  const allSubjects = (data) => {
+    let sub = []
+    data && data.subjects.map(subj=>{
+      sub.push(subj.code)
+    })
+
+    let subjects = [...new Set(sub)]
+
+    return subjects
+  }
   return (
     <div className="bg-gray-50">
       <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
@@ -131,10 +138,10 @@ export default function PreviousResults(props) {
           </div>
           <div className="ml-4 mt-2 flex-shrink-0">
             <Link
-              href="/exams"
+              href="/portal/exams"
               className="relative inline-flex items-center rounded-md border border-transparent bg-slate-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Back 
+              Back
             </Link>
           </div>
         </div>
@@ -144,7 +151,7 @@ export default function PreviousResults(props) {
         <div className="mx-auto max-w-3xl divide-y-2 divide-gray-200">
 
           <dl className="mt-6 space-y-2 divide-y divide-gray-200 pb-8">
-            {accYearsSample.sort().reverse().map((result, key) => (
+            {academicYears(getGrades(props.grades)).sort().reverse().map((result, key) => (
               <Disclosure as="div" key={key} className="pt-2">
                 {({ open }) => (
                   <>
@@ -153,7 +160,7 @@ export default function PreviousResults(props) {
                         <span className="font-medium text-gray-900">{result}</span>
                         <div className="flex ">
                           <span className="ml-6 flex h-7">
-                            Form {key + 1}
+                            Form {academicYears(getGrades(props.grades)).sort().indexOf(result)+1}
                           </span>
                           <span className="ml-6 flex h-7">
                             <ChevronDownIcon
@@ -165,7 +172,7 @@ export default function PreviousResults(props) {
                       </Disclosure.Button>
                     </dt>
                     <Disclosure.Panel as="dd" className="mt-2 pr-12">
-                      <PreviousResultsReportTemplate forms={forms(getGrades(props.grades))} subjects={subjecsSample} academicYears={academicYears(getGrades(props.grades))} terms={terms(getGrades(props.grades))}/>
+                      <PreviousResultsReportTemplate grades={getGrades(props.grades).grades} forms={forms(getGrades(props.grades))} subjects={allSubjects(getGrades(props.grades))} academicYear={result} terms={terms(getGrades(props.grades))} />
                     </Disclosure.Panel>
                   </>
                 )}

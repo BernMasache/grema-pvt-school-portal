@@ -53,6 +53,23 @@ const ResultsTemplate = (props) => {
     }
 
 
+    const gradeLetter = (grade) => {
+        if (grade >= 75 && grade <= 100) {
+            return "A"
+        } else if (grade >= 65 && grade <= 74) {
+            return "B"
+        } else if (grade >= 60 && grade <= 64) {
+            return "C"
+        } else if (grade >= 50 && grade <= 59) {
+            return "D"
+        } else if (grade >= 0 && grade <= 49) {
+            return "F"
+        } else {
+            return "F"
+        }
+    }
+
+
     const passRemark = (grades) => {
         let count = 0
         let passfail = ""
@@ -102,8 +119,8 @@ const ResultsTemplate = (props) => {
         return total
     }
 
-    const getTerm =(grades)=>{
-        return grades.length>0?grades[0].term:""
+    const getTerm = (grades) => {
+        return grades.length > 0 ? grades[0].term : ""
     }
     const gradeList = (grades) => {
         let contain = []
@@ -133,7 +150,55 @@ const ResultsTemplate = (props) => {
                         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                                 <div className="overflow-hidden border-t border-gray-200">
-                                    <table className="min-w-full divide-y divide-gray-200">
+                                    {
+                                        props && props.student.currentForm<=2? <table className="min-w-full divide-y divide-gray-200">
+                                        <thead className="bg-gray-50">
+                                            <tr>
+                                                <th scope="col" className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                                                    Position
+                                                </th>
+                                                <th scope="col" className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                                                    Total
+                                                </th>
+                                                <th scope="col" className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                                                    Remarks
+                                                </th>
+                                                {/*
+                                  `relative` is added here due to a weird bug in Safari that causes `sr-only` headings to introduce overflow on the body on mobile.
+                                */}
+                                                <th
+                                                    scope="col"
+                                                    className="relative px-6 py-3 text-left text-sm font-medium text-gray-500"
+                                                >
+                                                    <span className="sr-only">View receipt</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-gray-200 bg-white">
+
+                                            <tr>
+                                                <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
+
+                                                </td>
+                                                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                                    {calculateGradesTotal(props.grades)}
+                                                </td>
+                                                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                                    {passRemark(props.grades)}
+                                                </td>
+                                                <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+                                                    {/* <a href={payment.href} className="text-orange-600 hover:text-orange-900"> */}
+                                                    <button>
+                                                        <Link href={"/portal/exams/report"} className="text-green-500">
+                                                            View previous
+                                                        </Link>
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>: <table className="min-w-full divide-y divide-gray-200">
                                         <thead className="bg-gray-50">
                                             <tr>
                                                 <th scope="col" className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
@@ -157,30 +222,32 @@ const ResultsTemplate = (props) => {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-200 bg-white">
-                                            {payments.map((payment) => (
-                                                <tr key={payment.id}>
-                                                    <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
-                                                        <time remarks={payment.remarks}>{payment.position}</time>
-                                                    </td>
-                                                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                                        {points(props.grades)}
-                                                    </td>
-                                                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                                        {passRemark(props.grades)}
-                                                    </td>
-                                                    <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
-                                                        {/* <a href={payment.href} className="text-orange-600 hover:text-orange-900"> */}
-                                                        <button>
-                                                            <Link href={"/portal/exams/report"} className="text-green-500">
-                                                                View previous
-                                                            </Link>
-                                                        </button>
-                                                        
-                                                    </td>
-                                                </tr>
-                                            ))}
+
+                                            <tr>
+                                                <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
+
+                                                </td>
+                                                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                                    {points(props.grades)}
+                                                </td>
+                                                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                                    {passRemark(props.grades)}
+                                                </td>
+                                                <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+                                                    {/* <a href={payment.href} className="text-orange-600 hover:text-orange-900"> */}
+                                                    <button>
+                                                        <Link href={"/portal/exams/report"} className="text-green-500">
+                                                            View previous
+                                                        </Link>
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
+                                    }
+                                   
                                 </div>
 
 
@@ -192,7 +259,7 @@ const ResultsTemplate = (props) => {
             </section >
 
             <section className="mt-8">
-                <SchoolReport term={getTerm(props.grades)} student={props.student} pointValueSet={pointValue} grades={gradeList(props.grades)} totaGrades={calculateGradesTotal(props.grades)} points={points(props.grades)} passRemark={passRemark(props.grades)} />
+                <SchoolReport term={getTerm(props.grades)} student={props.student} pointValueSet={gradeLetter} grades={gradeList(props.grades)} totaGrades={calculateGradesTotal(props.grades)} points={points(props.grades)} passRemark={passRemark(props.grades)} />
             </section>
 
         </div >
