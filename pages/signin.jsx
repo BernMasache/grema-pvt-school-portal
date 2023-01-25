@@ -2,10 +2,11 @@
 import { LockClosedIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import Router from 'next/router'
 import { useState } from 'react'
+import useCrypto from '../services/cryptoJs'
 import useStudentStore from '../services/store/students.store'
-
+import cookie from 'js-cookie'
 const studentStore = new useStudentStore()
-
+const crypto = new useCrypto()
 export default function SigninPage() {
     const [student, setDetails] = useState({
         code: "",
@@ -15,14 +16,16 @@ export default function SigninPage() {
     const login = (e) => {
         e.preventDefault()
 
-                studentStore.signin(student).then(response => {
-                    if(response.status==200){
-                        setTimeout(()=>{
-                            Router.push("/portal")
-                        },200)
-                    }
-                })
-      
+        studentStore.signin(student).then(response => {
+
+            if (response.status == 200) {
+                
+                setTimeout(() => {
+                    Router.push("/portal")
+                }, 200)
+            }
+        })
+
     }
     const studentDetails = (e) => {
         setDetails({
@@ -44,7 +47,7 @@ export default function SigninPage() {
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                             Sign in to your account
                         </h2>
-                      
+
 
                     </div>
                     <form className="mt-8 space-y-6" action="#" method="POST">

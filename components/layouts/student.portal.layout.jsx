@@ -60,13 +60,15 @@ import {
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import FooterComponent from '../widgets/footer'
+import Image from 'next/image'
 
 const user = {
   name: 'Lisa Marie',
   email: 'lisamarie@example.com',
   imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80',
+    './assets/GREMA-LOGO2.jpg',
 }
+
 const navigation = [
   { name: 'Masache', href: '/' },
 ]
@@ -76,8 +78,8 @@ const userNavigation = [
 const subNavigation = [
   { name: 'Profile', href: '/portal/profile', icon: UserCircleIcon, current: false },
   { name: 'Exams', href: '/portal/exams', icon: CogIcon, current: false },
-  { name: 'Class timetable', href: '/portal/time-tables/exams', icon: BellIcon, current: false },
-  { name: 'Exams timetable', href: '/portal/time-tables/class', icon: KeyIcon, current: false },
+  { name: 'Class timetable', href: '/portal/time-tables/class', icon: BellIcon, current: false },
+  { name: 'Exams timetable', href: '/portal/time-tables/exams', icon: KeyIcon, current: false },
 ]
 const plans = [
   { name: 'Startup', priceMonthly: 29, priceYearly: 290, limit: 'Up to 5 active job postings' },
@@ -115,15 +117,21 @@ const MainLayout = ({ children }) => {
                 <div className="relative flex h-16 justify-between">
                   <div className="relative z-10 flex px-2 lg:px-0">
                     <div className="flex flex-shrink-0 items-center">
-                      <img
-                        className="block h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=orange&shade=500"
-                        alt="Your Company"
-                      />
+
+                      <Link href={"/"}
+                      >
+                        <Image
+                          className="block "
+                          src="/assets/GREMA-LOGO3.jpg"
+                          width={40}
+                          height={40}
+                          alt="Masache Schools"
+                        />
+                      </Link>
                     </div>
                   </div>
                   <div className="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
-                    <div className="w-full max-w-xs">
+                    <div className="w-full max-w-xs sr-only">
                       <label htmlFor="search" className="sr-only">
                         Search
                       </label>
@@ -166,7 +174,8 @@ const MainLayout = ({ children }) => {
                       <div>
                         <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2">
                           <span className="sr-only">Open user menu</span>
-                          <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                          {/* <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="user" /> */}
+                          <p className="p-2 rounded-full text-sm text-white bg-gray-500">User</p>
                         </Menu.Button>
                       </div>
                       <Transition
@@ -295,7 +304,7 @@ const MainLayout = ({ children }) => {
             </div>
           </div>
         </main>
-           
+
       </div>
     </>
   )

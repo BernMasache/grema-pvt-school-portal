@@ -46,7 +46,7 @@ class Page extends React.Component {
               <h1 className="text-3xl font-extrabold text-gray-900 capitalize">Exams Timetable </h1>
             </div>
             <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
-                Tab 1
+                
               {/* <CreateUserForm
                 roles={this.state.roles}
                 create={this.createUser}

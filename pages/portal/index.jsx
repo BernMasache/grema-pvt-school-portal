@@ -1,29 +1,5 @@
-// import React from 'react';
-// import Layout from '../../components/layouts/default.layout';
-// import { withRouter } from "next/router";
-// import LayoutComponetWithRouter from '../../components/layouts/mainLayout';
-
-// function Page({ children }) {
-//     return (
-//         <>
-
-//             <LayoutComponetWithRouter>
-//                 {children}
-//             </LayoutComponetWithRouter>
-
-//         </>
-//     );
-// }
-
-// const PageWithRouter = withRouter(Page);
-
-// PageWithRouter.getLayout = function getLayout(page) {
-//     return <Layout>{page}</Layout>;
-// };
-// export default PageWithRouter;
-
 import React from "react";
-import { withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 // import { withTranslation } from 'next-i18next';
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Layout from "../../components/layouts/mainLayout";
@@ -32,8 +8,10 @@ import StudentLayout from "../../components/layouts/student.portal.layout";
 // import BreadcrumbWidget from "../../components/widgets/breadcrumbs/admin.widget";
 // import LoadingWidget from "../../components/widgets/loading.widget"
 //INITIALISE
-// import useCrypto from "../../services/crypto.service";
-// const cryptoService = new useCrypto()
+import cookie from "js-cookie";
+
+import useCrypto from "../../services/cryptoJs";
+const crypto = new useCrypto()
 //PAGE
 class Page extends React.Component {
   constructor(props) {
@@ -49,7 +27,11 @@ class Page extends React.Component {
     };
   }
   componentDidMount() {
-    
+    // let stu = JSON.parse(crypto.decrypt(cookie.get("USER")))
+    // stu==null?Router.push("/signin"):""
+    // cookie.remove("TOKEN")
+    // cookie.remove("USER")
+
   }
   render() {
     return (

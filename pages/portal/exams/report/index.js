@@ -1,23 +1,25 @@
 
 import React from "react";
-import { withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 import StudentLayout from "../../../../components/layouts/student.portal.layout";
 import useStudentStore from "../../../../services/store/students.store";
 import PreviousResults from "../../../../components/widgets/previousExams";
 import useGradesStore from "../../../../services/store/grades.store";
-
+import useAcademicYearsStore from "../../../../services/store/academicYears.store";
 //STORES , COMPONETS AND FROMS 
 
 
 //INITIALISE
 const gradesStore = new useGradesStore()
+const academicYearStore = new useAcademicYearsStore()
 //PAGE
 class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      allGrades: []
+      allGrades: [],
+      academicYears: []
     };
   }
 
@@ -26,9 +28,24 @@ class Page extends React.Component {
   }
 
   getAllgrades = () => {
+
     gradesStore.allGrades().then(grades => {
+      if (grades == "Session expired") {
+        Router.push("/signin")
+      }
       return this.setState({
         allGrades: grades
+      })
+    })
+  }
+  getAllAcademicYearReleaseTrue = () => {
+
+    academicYearStore.getAllAcademicYearReleaseTrue().then(academicYears => {
+      if (academicYears == "Session expired") {
+        Router.push("/signin")
+      }
+      return this.setState({
+        academicYears: academicYears
       })
     })
   }
@@ -51,7 +68,7 @@ class Page extends React.Component {
           </div>
           <div className="align-middle inline-block min-w-full min-h-full mt-5" style={{ height: '60vh', minHeight: '200px', width: '100%' }}>
 
-            <PreviousResults grades={this.state.allGrades} />
+            <PreviousResults academicYears={this.state.academicYears} grades={this.state.allGrades} />
           </div>
         </div>
       </>

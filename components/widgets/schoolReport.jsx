@@ -33,6 +33,10 @@ export default function SchoolReport(props) {
         return props.pointValueSet(grade)
     }
 
+    const pointsValue = (grade) => {
+        return props.pointValue(grade)
+    }
+
     const gradePassMark = (grade) => {
 
         if (grade >= 40 && grade <= 100) {
@@ -115,7 +119,7 @@ export default function SchoolReport(props) {
                                                                                 SubTotals
                                                                             </td>
                                                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                                {props.totaGrades}
+                                                                                {props.totalGrades}
 
                                                                             </td>
                                                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"> </td>
@@ -160,7 +164,7 @@ export default function SchoolReport(props) {
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                                                     {grade.value}
                                                                                 </td>
-                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{pointsValueSet(grade.value)}</td>
+                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{pointsValue(grade.value)}</td>
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{gradePassMark(grade.value)}</td>
 
                                                                             </tr>
@@ -170,7 +174,7 @@ export default function SchoolReport(props) {
                                                                                 SubTotals
                                                                             </td>
                                                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                                {props.totaGrades}
+                                                                                {props.totalGrades}
 
                                                                             </td>
                                                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">  {props.points}</td>

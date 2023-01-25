@@ -1,11 +1,12 @@
 import React from "react";
-import { withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 import Layout from "../../../components/layouts/mainLayout";
 import ProfilePage from "../../../components/widgets/profile"
 import StudentLayout from "../../../components/layouts/student.portal.layout";
 //STORES , COMPONETS AND FROMS 
 import cookie from "js-cookie";
-
+import useCrypto from "../../../services/cryptoJs";
+const crypto = new useCrypto()
 
 //INITIALISE
 
@@ -26,10 +27,16 @@ class Page extends React.Component {
 
   getStudent = () => {
     let stu = JSON.parse(cookie.get("USER"))
-    this.setState({
-      student: stu
-    })
-    return stu;
+    if (stu == null) {
+      cookie.remove("TOKEN")
+      cookie.remove("USER")
+      Router.push("/signin")
+    } else {
+      this.setState({
+        student: stu
+      })
+      return stu;
+    }
   }
 
   render() {
@@ -61,16 +68,7 @@ class Page extends React.Component {
     );
   }
 }
-/*other supporting functions*/
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      // ...(await serverSideTranslations(locale, ['users', 'common'])),
-      // Will be passed to the page component as props
-    },
-  };
-}
-/***/
+
 const PageWithRouter = withRouter(Page);
 PageWithRouter.getLayout = function getLayout(page) {
   return <StudentLayout>{page}</StudentLayout>;

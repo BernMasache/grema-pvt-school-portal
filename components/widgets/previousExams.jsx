@@ -88,12 +88,23 @@ export default function PreviousResults(props) {
     let terms = []
     let subjects = []
     let forms = []
-    grades.grades == undefined ? "" : grades.grades.map(grade => {
-      accYear.push(grade.academicYear)
-      terms.push(grade.term)
-      forms.push(grade.form)
-      subjects.push(grade.Subject)
-    })
+    if (grades == undefined) {
+      
+    } else {
+      
+      if (grades.grades == undefined) {
+        
+      } else {
+        
+        grades.grades == undefined ? "" : grades.grades.map(grade => {
+          
+          accYear.push(grade.AcademicYear.academicYear)
+          terms.push(grade.AcademicYear.term)
+          forms.push(grade.form)
+          subjects.push(grade.Subject)
+        })
+       }
+    }
 
     return { subjects, accYear, terms, forms, grades: grades.grades }
   }
@@ -108,20 +119,20 @@ export default function PreviousResults(props) {
   const forms = (data) => {
 
     let allForms = [...new Set(data.forms)]
-    
+
     return allForms
   }
 
   const academicYears = (data) => {
-   
     let accYears = [...new Set(data.accYear)]
+    console.log(accYears);
 
     return accYears
   }
 
   const allSubjects = (data) => {
     let sub = []
-    data && data.subjects.map(subj=>{
+    data && data.subjects.map(subj => {
       sub.push(subj.code)
     })
 
@@ -160,7 +171,7 @@ export default function PreviousResults(props) {
                         <span className="font-medium text-gray-900">{result}</span>
                         <div className="flex ">
                           <span className="ml-6 flex h-7">
-                            Form {academicYears(getGrades(props.grades)).sort().indexOf(result)+1}
+                            Form {academicYears(getGrades(props.grades)).sort().indexOf(result) + 1}
                           </span>
                           <span className="ml-6 flex h-7">
                             <ChevronDownIcon

@@ -1,7 +1,9 @@
 import axios from 'axios';
 const resource = "http://localhost:5000/api/grema";
 import cookie from 'js-cookie';
+import useCrypto from '../cryptoJs';
 
+// const crypto = new useCrypto()
 export default class GradesService {
 
     getAllGrades() {
@@ -10,7 +12,7 @@ export default class GradesService {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${JSON.parse(cookie.get('TOKEN'))}`
+                    'Authorization': `Bearer ${cookie.get('TOKEN')}`
 
                 }
             })
@@ -28,15 +30,14 @@ export default class GradesService {
 
     getGrades(data) {
         return axios.get(`${resource}/grades/${data.term}&${data.form}&${data.year}`, {
-
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${JSON.parse(cookie.get('TOKEN'))}`
+                'Authorization': `Bearer ${cookie.get('TOKEN')}`
 
             }
         }).then(res => {
-            return res
+            return res.data
         }).catch(e => {
             if (e) {
                 throw e

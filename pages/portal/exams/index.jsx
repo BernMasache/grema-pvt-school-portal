@@ -1,16 +1,18 @@
 import cookie from "js-cookie";
 import React from "react";
-import { withRouter } from "next/router";
-import Layout from "../../../components/layouts/mainLayout";
-import ProfilePage from "../../../components/widgets/profile"
+import Router, { withRouter } from "next/router";
 import StudentLayout from "../../../components/layouts/student.portal.layout";
 import ResultsTemplate from "../../../components/widgets/exams";
 import useGradesStore from "../../../services/store/grades.store";
+import useCrypto from "../../../services/cryptoJs";
+import useAcademicYearsStore from "../../../services/store/academicYears.store";
 //STORES , COMPONETS AND FROMS 
 
 
 //INITIALISE
 const gradesStore = new useGradesStore()
+const academicYearsStore = new useAcademicYearsStore()
+const crypto = new useCrypto()
 //PAGE
 class Page extends React.Component {
   constructor(props) {
@@ -19,56 +21,64 @@ class Page extends React.Component {
       loading: false,
       grades: [],
       allGrades: [],
+      academicYears: [],
       roles: [],
-      student:{}
+      student: {}
     };
 
   }
+
   componentDidMount() {
-    this.studentGrades()
+    this.allAcademicYears()
     this.getStudent()
+    this.studentGrades()
   }
 
-    getStudent = () => {
-        let stu = JSON.parse(cookie.get("USER"))
-        this.setState({
-          student: stu
-        })
-        return stu;
-    }
-
-  studentGrades = () => {
-    let body = {
-      term: 1,
-      form: 2,
-      year: "2022-2023"
-    }
-    gradesStore.getGrades(body).then(data => {
-      this.setState({
-        grades: data.data.grades
+  allAcademicYears = () => {
+    return academicYearsStore.getAllAcademicYearsReleaseTrue().then(data => {
+      return this.setState({
+        academicYears: data.academicYears
       })
     })
+
   }
+
+  getStudent = () => {
+    let stu = JSON.parse(cookie.get("USER"))
+    return this.setState({
+      student: stu
+    })
+  }
+
+
+  studentGrades = () => {
+    return gradesStore.allGrades().then(grad => {
+      return this.setState({
+        grades: grad
+      })
+    })
+
+
+  }
+
   render() {
     return (
       <>
-        {/* <LoadingWidget loading={this.state.loading} /> */}
         <div className="max-w-2xl mx-auto px-2 sm:px-6 lg:max-w-5xl lg:px-2">
           <div>
-            {/* <BreadcrumbWidget breadcrumbs={this.state.breadcrumbPages} /> */}
           </div>
           <div className=" py-2  md:flex md:items-center md:justify-between">
             <div className="px-4 sm:px-6 md:px-0">
               <h1 className="text-3xl font-extrabold text-gray-900 capitalize">exams</h1>
             </div>
             <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
-             
+
 
             </div>
           </div>
           <div className="align-middle inline-block min-w-full min-h-full mt-5" style={{ height: '60vh', minHeight: '200px', width: '100%' }}>
 
-            <ResultsTemplate student={this.state.student} grades={this.state.grades} />
+            <ResultsTemplate grades={this.state.grades} academicYears={this.state.academicYears} student={this.state.student} />
           </div>
         </div>
       </>

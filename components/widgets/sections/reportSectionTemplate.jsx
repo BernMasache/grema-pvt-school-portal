@@ -26,7 +26,7 @@ export default function PreviousResultsReportTemplate(props) {
         value: grade.value,
         term: grade.term,
         form: grade.form,
-        year: grade.academicYear
+        year: grade.AcademicYear.academicYear
       })
     })
 
