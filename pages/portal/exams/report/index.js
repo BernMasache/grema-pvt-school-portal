@@ -25,11 +25,13 @@ class Page extends React.Component {
 
   componentDidMount() {
     this.getAllgrades()
+    this.getAllAcademicYearsReleaseTrue()
   }
 
   getAllgrades = () => {
 
     gradesStore.allGrades().then(grades => {
+      
       if (grades == "Session expired") {
         Router.push("/signin")
       }
@@ -38,9 +40,9 @@ class Page extends React.Component {
       })
     })
   }
-  getAllAcademicYearReleaseTrue = () => {
+  getAllAcademicYearsReleaseTrue = () => {
 
-    academicYearStore.getAllAcademicYearReleaseTrue().then(academicYears => {
+    academicYearStore.getAllAcademicYearsReleaseTrue().then(academicYears => {
       if (academicYears == "Session expired") {
         Router.push("/signin")
       }
@@ -49,6 +51,7 @@ class Page extends React.Component {
       })
     })
   }
+
   render() {
     return (
       <>

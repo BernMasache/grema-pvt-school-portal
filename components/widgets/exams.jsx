@@ -31,46 +31,45 @@ const ResultsTemplate = (props) => {
 
     const pointValue = (grade) => {
 
-        if (grade >= 85 && grade <= 100) {
-            return 1
-        } else if (grade >= 80 && grade <= 84) {
-            return 2
-        } else if (grade >= 75 && grade <= 79) {
-            return 3
-        } else if (grade >= 70 && grade <= 74) {
-            return 4
-        } else if (grade >= 60 && grade <= 69) {
-            return 5
-        } else if (grade >= 55 && grade <= 59) {
-            return 6
-        } else if (grade >= 50 && grade <= 54) {
-            return 7
-        } else if (grade >= 40 && grade <= 49) {
-            return 8
-        } else if (grade >= 0 && grade <= 39) {
-            return 9
-        } else {
-            return 9
-        }
-    }
-
-
-    const gradeLetter = (grade) => {
-        if (grade >= 75 && grade <= 100) {
-            return "A"
-        } else if (grade >= 65 && grade <= 74) {
-            return "B"
+        if (grade >= 90 && grade <= 100) {
+          return 1
+        } else if (grade >= 80 && grade <= 89) {
+          return 2
+        } else if (grade >= 70 && grade <= 79) {
+          return 3
+        } else if (grade >= 65 && grade <= 69) {
+          return 4
         } else if (grade >= 60 && grade <= 64) {
-            return "C"
-        } else if (grade >= 50 && grade <= 59) {
-            return "D"
-        } else if (grade >= 0 && grade <= 49) {
-            return "F"
+          return 5
+        } else if (grade >= 55 && grade <= 59) {
+          return 6
+        } else if (grade >= 46 && grade <= 54) {
+          return 7
+        } else if (grade >= 40 && grade <= 45) {
+          return 8
+        } else if (grade >= 0 && grade <= 39) {
+          return 9
         } else {
-            return "F"
+          return 9
         }
-    }
-
+      }
+    
+    
+      const gradeLetter = (grade) => {
+        if (grade >= 80 && grade <= 100) {
+          return "A"
+        } else if (grade >= 70 && grade <= 79) {
+          return "B"
+        } else if (grade >= 55 && grade <= 69) {
+          return "C"
+        } else if (grade >= 40 && grade <= 54) {
+          return "D"
+        } else if (grade >= 0 && grade <= 39) {
+          return "F"
+        } else {
+          return "F"
+        }
+      }
 
     const passRemark = (grades) => {
         let count = 0
