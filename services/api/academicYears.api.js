@@ -12,7 +12,7 @@ export default class AcademicYearsService {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${cookie.get('TOKEN')}`
+                    'Authorization': `Bearer ${JSON.parse(crypto.decrypt(cookie.get("TOKEN"))).token}`
                 }
             })
             .then(response => {

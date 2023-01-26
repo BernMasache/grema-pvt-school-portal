@@ -26,7 +26,8 @@ class Page extends React.Component {
   }
 
   getStudent = () => {
-    let stu = JSON.parse(cookie.get("USER"))
+    let stu = JSON.parse(crypto.decrypt(cookie.get("USER")))
+    
     if (stu == null) {
       cookie.remove("TOKEN")
       cookie.remove("USER")

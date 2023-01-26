@@ -8,7 +8,6 @@ export default class useCrypto {
     encrypt(data) {
         return CryptoJS.AES.encrypt(JSON.stringify(data), this.key).toString();
     }
-
     decrypt(data) {
         if (data == null) {
             return null;

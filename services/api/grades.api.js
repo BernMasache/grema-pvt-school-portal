@@ -3,8 +3,13 @@ const resource = "http://localhost:5000/api/grema";
 import cookie from 'js-cookie';
 import useCrypto from '../cryptoJs';
 
-// const crypto = new useCrypto()
+const crypto = new useCrypto()
 export default class GradesService {
+    // getToken = () => {
+    //     let token = JSON.parse(crypto.decrypt(cookie.get("TOKEN")))
+    //     return token.token
+    // }
+
 
     getAllGrades() {
         return axios
@@ -12,7 +17,7 @@ export default class GradesService {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${cookie.get('TOKEN')}`
+                    'Authorization': `Bearer ${JSON.parse(crypto.decrypt(cookie.get("TOKEN"))).token}`
 
                 }
             })
@@ -33,7 +38,7 @@ export default class GradesService {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${cookie.get('TOKEN')}`
+                'Authorization': `Bearer ${JSON.parse(crypto.decrypt(cookie.get("TOKEN"))).token}`
 
             }
         }).then(res => {

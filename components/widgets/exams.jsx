@@ -20,7 +20,7 @@ const ResultsTemplate = (props) => {
 
                 grades.grades.length > 0 ? grades.grades.map(grade => {
                     if (grade.AcademicYear.academicYear == props.academicYears[0].academicYear && grade.AcademicYear.term == props.academicYears[0].term && grade.form == props.student.currentForm) {
-                       
+
                         total += grade.value
                     }
                 }) : null
@@ -32,44 +32,44 @@ const ResultsTemplate = (props) => {
     const pointValue = (grade) => {
 
         if (grade >= 90 && grade <= 100) {
-          return 1
+            return 1
         } else if (grade >= 80 && grade <= 89) {
-          return 2
+            return 2
         } else if (grade >= 70 && grade <= 79) {
-          return 3
+            return 3
         } else if (grade >= 65 && grade <= 69) {
-          return 4
+            return 4
         } else if (grade >= 60 && grade <= 64) {
-          return 5
+            return 5
         } else if (grade >= 55 && grade <= 59) {
-          return 6
+            return 6
         } else if (grade >= 46 && grade <= 54) {
-          return 7
+            return 7
         } else if (grade >= 40 && grade <= 45) {
-          return 8
+            return 8
         } else if (grade >= 0 && grade <= 39) {
-          return 9
+            return 9
         } else {
-          return 9
+            return 9
         }
-      }
-    
-    
-      const gradeLetter = (grade) => {
+    }
+
+
+    const gradeLetter = (grade) => {
         if (grade >= 80 && grade <= 100) {
-          return "A"
+            return "A"
         } else if (grade >= 70 && grade <= 79) {
-          return "B"
+            return "B"
         } else if (grade >= 55 && grade <= 69) {
-          return "C"
+            return "C"
         } else if (grade >= 40 && grade <= 54) {
-          return "D"
+            return "D"
         } else if (grade >= 0 && grade <= 39) {
-          return "F"
+            return "F"
         } else {
-          return "F"
+            return "F"
         }
-      }
+    }
 
     const passRemark = (grades) => {
         let count = 0
@@ -85,7 +85,7 @@ const ResultsTemplate = (props) => {
 
                 grades.grades.length > 0 ? grades.grades.map(dd => {
                     if (dd.AcademicYear.academicYear == props.academicYears[0].academicYear && dd.AcademicYear.term == props.academicYears[0].term && dd.form == props.student.currentForm) {
-                        
+
                         contain.push({
                             code: dd.Subject.code,
                             name: dd.Subject.name,
@@ -148,7 +148,7 @@ const ResultsTemplate = (props) => {
     }
 
     const getTerm = (grades) => {
-
+        
         return grades.length > 0 ? grades[0].term : ""
     }
 

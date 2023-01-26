@@ -44,7 +44,8 @@ class Page extends React.Component {
   }
 
   getStudent = () => {
-    let stu = JSON.parse(cookie.get("USER"))
+    let stu = JSON.parse(crypto.decrypt(cookie.get("USER")))
+  
     return this.setState({
       student: stu
     })
@@ -53,6 +54,7 @@ class Page extends React.Component {
 
   studentGrades = () => {
     return gradesStore.allGrades().then(grad => {
+      
       return this.setState({
         grades: grad
       })
