@@ -9,24 +9,24 @@ function classNames(...classes) {
 export default function PreviousResultsReportTemplate(props) {
 
   const getSubjects = (subj) => {
-    return subj.length > 0 ? subj : []
+    return subj?.length > 0 ? subj : []
   }
   const getTerms = (terms) => {
-    return terms.length > 0 ? terms : []
+    return terms?.length > 0 ? terms : []
   }
   const getForms = (forms) => {
-    return forms.length > 0 ? forms : []
+    return forms?.length > 0 ? forms : []
   }
   const getGrades = (grades) => {
     let gradesHolder = []
 
     grades.map(grade => {
       gradesHolder.push({
-        code: grade.Subject.code,
-        value: grade.value,
-        term: grade.term,
-        form: grade.form,
-        year: grade.AcademicYear.academicYear
+        code: grade?.Subject.code,
+        value: grade?.value,
+        term: grade?.term,
+        form: grade?.form,
+        year: grade?.AcademicYear?.academicYear
       })
     })
 
@@ -54,27 +54,27 @@ export default function PreviousResultsReportTemplate(props) {
 
     } else {
 
-      grades.length > 0 ? grades.map(dd => {
+      grades?.length > 0 ? grades.map(dd => {
 
-        if (dd.AcademicYear.academicYear == academicYear && dd.AcademicYear.term == term) {
+        if (dd?.AcademicYear?.academicYear == academicYear && dd?.AcademicYear?.term == term) {
           contain.push({
-            code: dd.Subject.code,
-            name: dd.Subject.name,
-            value: dd.value,
+            code: dd?.Subject?.code,
+            name: dd?.Subject?.name,
+            value: dd?.value,
           })
         }
 
       }) : null
-      contain.map(grade => {
-        if (grade.value >= 40) {
+      contain?.map(grade => {
+        if (grade?.value >= 40) {
           count += 1
         }
       })
 
       let english = 0
-      contain.map(grade => {
-        if (grade.code == "eng") {
-          english = grade.value
+      contain?.map(grade => {
+        if (grade?.code == "eng") {
+          english = grade?.value
         }
       })
 
@@ -147,14 +147,14 @@ export default function PreviousResultsReportTemplate(props) {
 
       } else {
 
-        grades.length > 0 ? grades.map(dd => {
+        grades?.length > 0 ? grades?.map(dd => {
 
-          if (dd.AcademicYear.academicYear == academicYear && dd.AcademicYear.term == term) {
-            contain.push(dd.value,)
+          if (dd?.AcademicYear?.academicYear == academicYear && dd?.AcademicYear?.term == term) {
+            contain?.push(dd?.value,)
           }
         }) : null
 
-        contain.sort().reverse().slice(0, 6).map(grade => {
+        contain?.sort().reverse().slice(0, 6)?.map(grade => {
           total += pointValue(grade)
         })
       }
@@ -175,8 +175,8 @@ export default function PreviousResultsReportTemplate(props) {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {
 
-                    getTerms(props.terms.sort()).map((term, key) => {
-                      if (passRemark(props.grades, props.academicYear, term)=="N/A"){
+                    getTerms(props?.terms?.sort())?.map((term, key) => {
+                      if (passRemark(props?.grades, props.academicYear, term)=="N/A"){
 
                       }else{
                         return <tr key={key}>

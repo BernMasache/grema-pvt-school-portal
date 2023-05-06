@@ -11,7 +11,10 @@ import StudentLayout from "../../components/layouts/student.portal.layout";
 import cookie from "js-cookie";
 
 import useCrypto from "../../services/cryptoJs";
+import useAcademicYearsStore from "../../services/store/academicYears.store";
+import Cookies from "js-cookie";
 const crypto = new useCrypto()
+const academicYearsStore = new useAcademicYearsStore()
 //PAGE
 class Page extends React.Component {
   constructor(props) {
@@ -31,8 +34,19 @@ class Page extends React.Component {
     // stu==null?Router.push("/signin"):""
     // cookie.remove("TOKEN")
     // cookie.remove("USER")
-
+    this.getCurrentAcademicYear()
   }
+  getCurrentAcademicYear = () => {
+    return academicYearsStore.getCurrentAcademicYear().then(data => {
+      if (data.length>0) {
+        Cookies.set("CAY",JSON.stringify(data[0]))
+      }else{
+        Cookies.set("CAY",JSON.stringify({}))
+
+      }
+    })
+  }
+
   render() {
     return (
       <>

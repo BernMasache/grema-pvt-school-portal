@@ -14,6 +14,15 @@ export default class useAcademicYearsStore {
             throw error
         });
     }
+    getCurrentAcademicYear = async () => {
+        return await academicYearsService.getCurrentAcademicYear().then((result => {
+            if (result) {
+                return result
+            }
+        })).catch(error => {
+            throw error
+        });
+    }
 
 }
 

@@ -26,5 +26,15 @@ export default class useGradesStore {
             throw error
         });
     }
+    studentsGradesPerTermFormAcademicYear = async (data) => {
+
+        return await gradesService.studentsGradesPerTermFormAcademicYear(data).then((result => {
+            if (result) {
+                return result
+            }
+        })).catch(error => {
+            throw error
+        });
+    }
 }
 

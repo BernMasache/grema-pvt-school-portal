@@ -23,7 +23,7 @@ import { classNames, componentKey } from "../../services/helpers.service"
 //INITIALISE
 
 //PAGE
-class LayoutComponet extends React.Component {
+class LayoutComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -308,7 +308,7 @@ class LayoutComponet extends React.Component {
     )
   }
 }
-const LayoutComponetWithRouter = withRouter(LayoutComponet);
+const LayoutComponentWithRouter = withRouter(LayoutComponent);
 
-export default LayoutComponetWithRouter;
+export default LayoutComponentWithRouter;
 

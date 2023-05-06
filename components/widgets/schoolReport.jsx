@@ -4,22 +4,13 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { withRouter } from 'next/router'
 import JsPDF from 'jspdf';
-const faqs = [
-    {
-        question: "What's the best thing about Switzerland?",
-        answer:
-            "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-    },
-    // More questions...
-]
-
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function SchoolReport(props) {
-    const [grades, setGrades] = useState(props.grades)
+    // const [grades, setGrades] = useState(props?.grades)
 
     const generatePDF = () => {
 
@@ -47,7 +38,6 @@ export default function SchoolReport(props) {
     }
 
     const getTerm = () => {
-
         return props.term
     }
 
@@ -56,7 +46,7 @@ export default function SchoolReport(props) {
             <div className="mx-auto max-w-7xl py-12 px-6 sm:py-8 lg:px-8">
                 <div className="mx-auto max-w-3xl divide-y-2 divide-gray-200">
                     <h2 className="text-center text-sm font-normal text-gray-500 sm:text-2xl">
-                        Overral Report
+                        Overall Report
                     </h2>
                     <dl className="mt-6 space-y-6 divide-y divide-gray-200">
 
@@ -65,7 +55,7 @@ export default function SchoolReport(props) {
                                 <>
                                     <dt className="text-lg">
                                         <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-400">
-                                            <span className="font-sm text-gray-600">{props.student.username} term {getTerm()} school report</span>
+                                            <span className="font-sm text-gray-600">{props?.student?.username} term {getTerm()} school report</span>
                                             <span className="ml-6 flex h-7 items-center">
                                                 <ChevronDownIcon
                                                     className={classNames(open ? '-rotate-180' : 'rotate-0', 'h-6 w-6 transform')}
@@ -77,7 +67,7 @@ export default function SchoolReport(props) {
                                     <Disclosure.Panel as="dd" className="mt-2 pr-12">
 
                                         {
-                                            props && props.student.currentForm <= 2 ?
+                                            props && props?.student?.currentForm <= 2 ?
                                                 <div className="mt-8 flex flex-col">
                                                     <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                                         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -101,16 +91,16 @@ export default function SchoolReport(props) {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody className="divide-y divide-gray-200 bg-white">
-                                                                        {props.grades.length > 0 ? props.grades.map((grade, key) => (
+                                                                        {props?.grades?.length > 0 ? props?.grades.map((grade, key) => (
                                                                             <tr key={key}>
                                                                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">
-                                                                                    {grade.name}
+                                                                                    {grade?.name}
                                                                                 </td>
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                                    {grade.value}
+                                                                                    {grade?.value}
                                                                                 </td>
-                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{pointsValueSet(grade.value)}</td>
-                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{gradePassMark(grade.value)}</td>
+                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{pointsValueSet(grade?.value)}</td>
+                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{gradePassMark(grade?.value)}</td>
 
                                                                             </tr>
                                                                         )) : ""}
@@ -119,11 +109,11 @@ export default function SchoolReport(props) {
                                                                                 SubTotals
                                                                             </td>
                                                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                                {props.totalGrades}
+                                                                                {props?.totalGrades}
 
                                                                             </td>
                                                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"> </td>
-                                                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{props.passRemark}</td>
+                                                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{props?.passRemark}</td>
 
                                                                         </tr>
                                                                     </tbody>
@@ -156,16 +146,16 @@ export default function SchoolReport(props) {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody className="divide-y divide-gray-200 bg-white">
-                                                                        {props.grades.length > 0 ? props.grades.map((grade, key) => (
+                                                                        {props?.grades?.length > 0 ? props?.grades?.map((grade, key) => (
                                                                             <tr key={key}>
                                                                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">
-                                                                                    {grade.name}
+                                                                                    {grade?.name}
                                                                                 </td>
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                                    {grade.value}
+                                                                                    {grade?.value}
                                                                                 </td>
-                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{pointsValue(grade.value)}</td>
-                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{gradePassMark(grade.value)}</td>
+                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{pointsValue(grade?.value)}</td>
+                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{gradePassMark(grade?.value)}</td>
 
                                                                             </tr>
                                                                         )) : ""}
@@ -174,11 +164,11 @@ export default function SchoolReport(props) {
                                                                                 SubTotals
                                                                             </td>
                                                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                                {props.totalGrades}
+                                                                                {props?.totalGrades}
 
                                                                             </td>
-                                                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">  {props.points}</td>
-                                                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{props.passRemark}</td>
+                                                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">  {props?.points}</td>
+                                                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{props?.passRemark}</td>
 
                                                                         </tr>
                                                                     </tbody>

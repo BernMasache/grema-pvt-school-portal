@@ -50,7 +50,7 @@ class Page extends React.Component {
           </div>
           <div className=" py-2  md:flex md:items-center md:justify-between">
             <div className="px-4 sm:px-6 md:px-0">
-              <h1 className="text-3xl font-extrabold text-gray-900 capitalize">Student</h1>
+              <h1 className="sr-only text-3xl font-extrabold text-gray-900 capitalize">Student</h1>
             </div>
             <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
               {["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][new Date().getMonth()]},{new Date().getDate()}

@@ -44,7 +44,7 @@ class ProfilePage extends React.Component {
                             <div className="sm:col-span-1">
                                 <dt className="text-sm font-medium text-gray-500">Sex</dt>
                                 <dd className="mt-1 text-sm text-gray-900">
-                                    {this.props.student!=null? this.props.student.sex: Router.push("/signin")}
+                                    {this.props.student!=null? <span>{this.props.student.sex=="m"?"Male":"Female"}</span>: Router.push("/signin")}
                                 </dd>
                             </div>
                             <div className="sm:col-span-1">
