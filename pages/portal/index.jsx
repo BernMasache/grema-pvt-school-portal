@@ -13,6 +13,7 @@ import cookie from "js-cookie";
 import useCrypto from "../../services/cryptoJs";
 import useAcademicYearsStore from "../../services/store/academicYears.store";
 import Cookies from "js-cookie";
+import PortalPage from "../../components/widgets/portal";
 const crypto = new useCrypto()
 const academicYearsStore = new useAcademicYearsStore()
 //PAGE
@@ -50,21 +51,8 @@ class Page extends React.Component {
   render() {
     return (
       <>
-        {/* <LoadingWidget loading={this.state.loading} /> */}
-        <div className="max-w-2xl mx-auto px-2 sm:px-6 lg:max-w-5xl lg:px-2">
-          <div>
-            {/* <BreadcrumbWidget breadcrumbs={this.state.breadcrumbPages} /> */}
-          </div>
-          <div className=" py-2  md:flex md:items-center md:justify-between">
-            <div className="px-4 sm:px-6 md:px-0">
-              <h1 className="text-3xl font-extrabold text-gray-900 capitalize">Profile</h1>
-            </div>
-            <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
-            </div>
-          </div>
-          <div className="align-middle inline-block min-w-full min-h-full mt-5">
-          </div>
-        </div>
+     
+            <PortalPage/>
 
       </>
     );

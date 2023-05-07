@@ -195,6 +195,7 @@ const ResultsTemplate = (props) => {
     let grades = props?.studentsGradesPerTermFormAcademicYear;
     let studentHolder = [];
     let pointsHolder = [];
+    let gradeTotals = [];
     grades?.students?.map((stud) => {
       studentHolder.push({
         student: stud?.code,
@@ -202,14 +203,27 @@ const ResultsTemplate = (props) => {
       });
     });
     studentHolder?.map((grade) => {
+      gradeTotals?.push(calculateGradesTotal(grade));
       pointsHolder?.push(points(grade));
     });
-    return sortPoints(pointsHolder);
+    return {
+      positions: sortPoints(pointsHolder),
+      totals: sortPoints(gradeTotals).reverse(),
+    };
   };
   // student position based to the points obtained,
   // plus 1 is set because indexOf return positions from zero
   const studentPosition = (point) => {
-    let pointsSorted = pointsPosition();
+    let pointsSorted = pointsPosition().positions;
+    let positionOfStudent = "";
+    if (pointsSorted?.length > 0) {
+      positionOfStudent = pointsSorted?.indexOf(point) + 1;
+    }
+    return positionOfStudent;
+  };
+
+  const studentTotalsPosition = (point) => {
+    let pointsSorted = pointsPosition().totals;
     let positionOfStudent = "";
     if (pointsSorted?.length > 0) {
       positionOfStudent = pointsSorted?.indexOf(point) + 1;
@@ -273,7 +287,11 @@ const ResultsTemplate = (props) => {
                       </thead>
                       <tbody className="divide-y divide-gray-200 bg-white">
                         <tr>
-                          <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900"></td>
+                          <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
+                            {studentTotalsPosition(
+                              calculateGradesTotal(props?.grades)
+                            )}
+                          </td>
                           <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                             {calculateGradesTotal(props?.grades)}
                           </td>

@@ -17,16 +17,16 @@ export async function middleware(request, response) {
     // if (token == null && request.nextUrl.pathname == '/signin') {
     //   return NextResponse.redirect(new URL('/signin', request.url))
     // }
-    //admins
+    //student
     if (token == null && request.nextUrl.pathname == '/portal') {
       return NextResponse.redirect(new URL('/signin', request.url))
     }
-    // // //admins
+    // // //student
     if (token != null && request.nextUrl.pathname == '/') {
       return NextResponse.redirect(new URL('/portal', request.url))
     }
   
-    // //admins
+    // //student
     if (request.nextUrl.pathname == '/signin') {
       return NextResponse.redirect(new URL('/portal', request.url))
     }
