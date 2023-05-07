@@ -1,4 +1,14 @@
-export default function PortalPage() {
+import Cookies from "js-cookie";
+
+export default function PortalPage(props) {
+  const currentAcademicYear = () => {
+
+    let dd = Cookies.get("CAY");
+    // console.log(dd);
+    // return JSON.parse(Cookies.get("CAY"));
+    // return dd
+  };
+  currentAcademicYear();
   return (
     <div className="overflow-hidden bg-white py-4">
       <div className="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
@@ -7,12 +17,26 @@ export default function PortalPage() {
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Welcome to XamPortal
             </h2>
-            <p className="mt-6 text-xl leading-8 text-gray-600">
-              End of term examinations are not yet out.
-            </p>
-            <p className="mt-6 text-base leading-7 text-gray-600">
-            Please check later.
-            </p>
+            <div className="mt-6 text-xl leading-8 text-gray-600">
+              End of term {props?.currentAcademicYear?.AcademicYear?.term} examinations{" "}
+              {props?.currentAcademicYear?.AcademicYear?.release == true ? (
+                <>
+                  are out.
+                  <p className="mt-2 text-base leading-7 text-gray-600">
+                    Please check your exams tab.
+                  </p>
+                </>
+              ) : (
+                <>
+                  are not out.
+                  <p className="mt-2 text-base leading-7 text-gray-600">
+                    Please check later.
+                  </p>
+                </>
+              )}
+              
+            </div>
+
             <div className="mt-10 flex">
               <a
                 href="#"
@@ -30,7 +54,6 @@ export default function PortalPage() {
                 className="aspect-[7/5] w-[37rem] max-w-none rounded-2xl bg-gray-50 object-cover"
               />
             </div>
-         
           </div>
         </div>
       </div>

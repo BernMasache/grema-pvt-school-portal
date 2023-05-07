@@ -24,14 +24,34 @@ export default class StudentService {
 
   distinctData(term) {
     return axios
-      .get(resource + "/distinct/student-subject/"+term, {
+      .get(resource + "/distinct/student-subject/" + term, {
         headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${
-              JSON.parse(crypto.decrypt(cookie.get("TOKEN")))?.token
-            }`,
-          },
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(crypto.decrypt(cookie.get("TOKEN")))?.token
+          }`,
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        if (error) {
+          throw error;
+        }
+      });
+  }
+  updatePassword(data) {
+    return axios
+      .patch(resource + "/password/update/student/" + data.id, data, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            JSON.parse(crypto.decrypt(cookie.get("TOKEN")))?.token
+          }`,
+        },
       })
       .then((response) => {
         return response;

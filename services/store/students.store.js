@@ -37,4 +37,14 @@ export default class useStudentStore {
         throw error;
       });
   };
+  updatePassword = async (data) => {
+    return await studentsService
+      .updatePassword(data)
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
 }

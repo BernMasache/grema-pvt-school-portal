@@ -56,6 +56,12 @@ const subNavigation = [
     icon: KeyIcon,
     current: false,
   },
+  {
+    name: "Settings",
+    href: "/portal/settings",
+    icon: KeyIcon,
+    current: false,
+  },
 ];
 
 const crypto = new useCrypto();

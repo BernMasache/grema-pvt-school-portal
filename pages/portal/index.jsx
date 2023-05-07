@@ -4,7 +4,7 @@ import Router, { withRouter } from "next/router";
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Layout from "../../components/layouts/mainLayout";
 import StudentLayout from "../../components/layouts/student.portal.layout";
-//STORES , COMPONETS AND FROMS 
+//STORES , COMPONETS AND FROMS
 // import BreadcrumbWidget from "../../components/widgets/breadcrumbs/admin.widget";
 // import LoadingWidget from "../../components/widgets/loading.widget"
 //INITIALISE
@@ -14,18 +14,19 @@ import useCrypto from "../../services/cryptoJs";
 import useAcademicYearsStore from "../../services/store/academicYears.store";
 import Cookies from "js-cookie";
 import PortalPage from "../../components/widgets/portal";
-const crypto = new useCrypto()
-const academicYearsStore = new useAcademicYearsStore()
+const crypto = new useCrypto();
+const academicYearsStore = new useAcademicYearsStore();
 //PAGE
 class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
+      currentAcademicYear: {},
       breadcrumbPages: [
         {
           href: "#",
-          name: "Home"
+          name: "Home",
         },
       ],
     };
@@ -35,26 +36,26 @@ class Page extends React.Component {
     // stu==null?Router.push("/signin"):""
     // cookie.remove("TOKEN")
     // cookie.remove("USER")
-    this.getCurrentAcademicYear()
+    this.getCurrentAcademicYear();
   }
   getCurrentAcademicYear = () => {
-    return academicYearsStore.getCurrentAcademicYear().then(data => {
-      if (data.length>0) {
-        Cookies.set("CAY",JSON.stringify(data[0]))
-      }else{
-        Cookies.set("CAY",JSON.stringify({}))
-
+    return academicYearsStore.getCurrentAcademicYear().then((data) => {
+      this.setState({
+        currentAcademicYear: data[0],
+      });
+      if (data.length > 0) {
+        Cookies.set("CAY", JSON.stringify(data[0]));
+      } else {
+        Cookies.set("CAY", JSON.stringify({}));
       }
-    })
-  }
+    });
+  };
 
   render() {
     return (
-      <>
-     
-            <PortalPage/>
-
-      </>
+      <div>
+        <PortalPage currentAcademicYear={this.state.currentAcademicYear} />
+      </div>
     );
   }
 }
