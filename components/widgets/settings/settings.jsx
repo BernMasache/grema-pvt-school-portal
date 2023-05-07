@@ -34,11 +34,33 @@ function UpdatePassword(props) {
       data.oldPassword == null ||
       data.oldPassword == undefined
     ) {
+      toast.error("Fill the new password field", {
+        position: "top-right",
+        transition: Flip,
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } else if (
       data.newPassword == "" ||
       data.newPassword == null ||
       data.newPassword == undefined
     ) {
+      toast.error("Please confirm the new password", {
+        position: "top-right",
+        transition: Flip,
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } else {
       if (data.oldPassword == data.newPassword) {
         data.id = props?.studentId().uuid;
