@@ -1,5 +1,5 @@
 import axios from "axios";
-const resource = "http://localhost:5000/api/schools";
+const resource = "http://localhost:5000/api/1.0/schools";
 import cookie from "js-cookie";
 import useCrypto from "../cryptoJs";
 const crypto = new useCrypto();
@@ -44,7 +44,7 @@ export default class StudentService {
   }
   updatePassword(data) {
     return axios
-      .patch(resource + "/password/update/student/" + data.id, data, {
+      ?.patch(resource + "/password/update/student/" + data?.id, data, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",

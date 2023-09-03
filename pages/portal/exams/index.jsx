@@ -69,6 +69,7 @@ class Page extends React.Component {
       });
     });
   };
+  
   studentsGradesPerTermFormAcademicYear = () => {
     return gradesStore
       .studentsGradesPerTermFormAcademicYear({

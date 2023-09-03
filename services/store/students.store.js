@@ -7,12 +7,12 @@ const crypto = new useCrypto();
 export default class useStudentStore {
   signin = async (data) => {
     return await studentsService
-      .signin(data)
+      ?.signin(data)
       .then((result) => {
-        if (result) {
-          let user = JSON.stringify(result.data.student);
-          let token = { token: result.data.token };
-          cookie.set("TOKEN", crypto.encrypt(JSON.stringify(token)), {
+        if (result?.status == 200 && result?.data?.error == false) {
+          let user = JSON.stringify(result?.data?.student);
+          let token = { token: result?.data?.token };
+          cookie.set("TOKEN", crypto?.encrypt(JSON.stringify(token)), {
             expires: 2 / 24,
             sameSite: "lax",
           });
@@ -20,6 +20,8 @@ export default class useStudentStore {
             expires: 2 / 24,
             sameSite: "lax",
           });
+          return result;
+        } else {
           return result;
         }
       })
@@ -39,8 +41,8 @@ export default class useStudentStore {
   };
   updatePassword = async (data) => {
     return await studentsService
-      .updatePassword(data)
-      .then((result) => {
+      ?.updatePassword(data)
+      ?.then((result) => {
         return result;
       })
       .catch((error) => {
