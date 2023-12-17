@@ -122,25 +122,25 @@ const ResultsTemplate = (props) => {
 
   const points = (grades) => {
     let total = 0;
-    let contain = [];
+    let container = [];
     if (grades == undefined) {
     } else {
       if (grades?.grades == undefined) {
       } else {
         grades?.grades?.length > 0
-          ? grades.grades.map((dd) => {
+          ? grades.grades.map((gradeValue) => {
               if (
-                dd?.AcademicYear?.academicYear ==
+                gradeValue?.AcademicYear?.academicYear ==
                   props?.currentAcademicYear?.AcademicYear?.academicYear &&
-                dd?.AcademicYear?.term ==
+                gradeValue?.AcademicYear?.term ==
                   props?.currentAcademicYear?.AcademicYear?.term &&
-                dd?.form == props?.student?.currentForm
+                gradeValue?.form == props?.student?.currentForm
               ) {
-                contain.push(dd?.value);
+                container.push(gradeValue?.value);
               }
             })
           : null;
-        contain
+        container
           .sort()
           .reverse()
           .slice(0, 6)
@@ -163,17 +163,17 @@ const ResultsTemplate = (props) => {
       if (grades?.grades == undefined) {
       } else {
         grades?.grades.length > 0
-          ? grades?.grades?.map((dd) => {
+          ? grades?.grades?.map((gradeValue) => {
               if (
-                dd?.AcademicYear?.academicYear ==
+                gradeValue?.AcademicYear?.academicYear ==
                   props?.currentAcademicYear?.AcademicYear?.academicYear &&
-                dd?.AcademicYear?.term ==
+                gradeValue?.AcademicYear?.term ==
                   props?.currentAcademicYear?.AcademicYear?.term &&
-                dd?.form == props?.student?.currentForm
+                gradeValue?.form == props?.student?.currentForm
               ) {
                 contain.push({
-                  value: dd?.value,
-                  name: dd?.Subject.name,
+                  value: gradeValue?.value,
+                  name: gradeValue?.Subject.name,
                 });
               }
             })

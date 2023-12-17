@@ -18,21 +18,26 @@ export default function SigninPage() {
     studentStore
       ?.signin(student)
       .then((response) => {
-        if (response?.status == 200) {
+        if (response?.status == 200 && response?.data?.error == false) {
           setTimeout(() => {
             Router.push("/portal");
           }, 200);
+        } else {
+          alert(`Error: Server ${response?.data?.message}`);
         }
       })
       .catch((e) => {
-        if (e?.response?.status == 404)
-          return alert("Error: Server" + e?.statusText);
+        if (e?.response?.status == 404) {
+          alert(`Error: ${e?.statusText}`);
+        } else {
+          alert(`Error occured`);
+        }
       });
   };
   const studentDetails = (e) => {
     setDetails({
       ...student,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e?.target?.value,
     });
   };
   return (
