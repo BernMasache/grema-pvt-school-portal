@@ -72,7 +72,7 @@ class Page extends React.Component {
     };
   };
   getUser = () => {
-    let user = Cookies.get("USER");
+    let user = Cookies.get("PUSER");
     let decryptedUser = crypto.decrypt(user);
 
     return JSON.parse(decryptedUser);

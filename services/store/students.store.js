@@ -12,11 +12,11 @@ export default class useStudentStore {
         if (result) {
           let user = JSON.stringify(result.data.student);
           let token = { token: result.data.token };
-          cookie.set("TOKEN", crypto.encrypt(JSON.stringify(token)), {
+          cookie.set("PTOKEN", crypto.encrypt(JSON.stringify(token)), {
             expires: 2 / 24,
             sameSite: "lax",
           });
-          cookie.set("USER", crypto.encrypt(user), {
+          cookie.set("PUSER", crypto.encrypt(user), {
             expires: 2 / 24,
             sameSite: "lax",
           });

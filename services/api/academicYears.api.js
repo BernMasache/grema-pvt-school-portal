@@ -1,5 +1,7 @@
 import axios from 'axios';
-const resource = "http://localhost:5000/api/schools";
+// const resource = "http://localhost:5000/api/1.0.0/schools";
+const url = process.env.NEXT_PUBLIC_URL_API;
+
 import cookie from 'js-cookie';
 import useCrypto from '../cryptoJs';
 
@@ -8,11 +10,11 @@ export default class AcademicYearsService {
 
     getAllAcademicYearsReleaseTrue() {
         return axios
-            .get(resource + "/student/all-academic-years", {
+            .get(url + "/student/all-academic-years", {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${JSON.parse(crypto.decrypt(cookie.get("TOKEN")))?.token}`
+                    'Authorization': `Bearer ${JSON.parse(crypto.decrypt(cookie.get("PTOKEN")))?.token}`
                 }
             })
             .then(response => {
@@ -28,11 +30,11 @@ export default class AcademicYearsService {
 
     getCurrentAcademicYear() {
         return axios
-            .get(resource + "/current/academic-year", {
+            .get(url + "/current/academic-year", {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${JSON.parse(crypto.decrypt(cookie.get("TOKEN")))?.token}`
+                    'Authorization': `Bearer ${JSON.parse(crypto.decrypt(cookie.get("PTOKEN")))?.token}`
                 }
             })
             .then(response => {

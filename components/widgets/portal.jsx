@@ -3,9 +3,9 @@ import Cookies from "js-cookie";
 export default function PortalPage(props) {
   const currentAcademicYear = () => {
 
-    let dd = Cookies.get("CAY");
+    let dd = Cookies.get("PCAY");
     // console.log(dd);
-    // return JSON.parse(Cookies.get("CAY"));
+    // return JSON.parse(Cookies.get("PCAY"));
     // return dd
   };
   currentAcademicYear();

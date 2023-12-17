@@ -5,8 +5,6 @@ import Router, { withRouter } from "next/router";
 import Layout from "../../components/layouts/mainLayout";
 import StudentLayout from "../../components/layouts/student.portal.layout";
 //STORES , COMPONETS AND FROMS
-// import BreadcrumbWidget from "../../components/widgets/breadcrumbs/admin.widget";
-// import LoadingWidget from "../../components/widgets/loading.widget"
 //INITIALISE
 import cookie from "js-cookie";
 
@@ -32,10 +30,10 @@ class Page extends React.Component {
     };
   }
   componentDidMount() {
-    // let stu = JSON.parse(crypto.decrypt(cookie.get("USER")))
+    // let stu = JSON.parse(crypto.decrypt(cookie.get("PUSER")))
     // stu==null?Router.push("/signin"):""
     // cookie.remove("TOKEN")
-    // cookie.remove("USER")
+    // cookie.remove("PUSER")
     this.getCurrentAcademicYear();
   }
   getCurrentAcademicYear = () => {
@@ -44,9 +42,9 @@ class Page extends React.Component {
         currentAcademicYear: data[0],
       });
       if (data.length > 0) {
-        Cookies.set("CAY", JSON.stringify(data[0]));
+        Cookies.set("PCAY", JSON.stringify(data[0]));
       } else {
-        Cookies.set("CAY", JSON.stringify({}));
+        Cookies.set("PCAY", JSON.stringify({}));
       }
     });
   };

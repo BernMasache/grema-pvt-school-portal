@@ -50,12 +50,12 @@ class Page extends React.Component {
   getCurrentAcademicYear = () => {
     return this.setState({
       currentAcademicYear:
-        cookie.get("CAY") == undefined ? {} : JSON.parse(cookie.get("CAY")),
+        cookie.get("PCAY") == undefined ? {} : JSON.parse(cookie.get("PCAY")),
     });
   };
 
   getStudent = () => {
-    let stu = JSON.parse(crypto.decrypt(cookie.get("USER")));
+    let stu = JSON.parse(crypto.decrypt(cookie.get("PUSER")));
     return this.setState({
       student: stu,
     });
@@ -72,12 +72,15 @@ class Page extends React.Component {
   studentsGradesPerTermFormAcademicYear = () => {
     return gradesStore
       .studentsGradesPerTermFormAcademicYear({
-        term: 3,
-        form: 4,
-        year: "2022-2023",
+        term:
+          cookie.get("PCAY") &&
+          JSON.parse(cookie.get("PCAY"))?.AcademicYear?.term,
+        form: this.state.student?.currentForm,
+        year:
+          cookie.get("PCAY") &&
+          JSON.parse(cookie.get("PCAY"))?.AcademicYear?.academicYear,
       })
       .then((grad) => {
-        // console.log(grad);
         return this.setState({
           studentsGradesPerTermFormAcademicYear: grad,
         });
@@ -86,7 +89,7 @@ class Page extends React.Component {
 
   studentDistinctData = () => {
     return studentStore
-      .distinctData(JSON.parse(cookie.get("CAY"))?.AcademicYear?.term)
+      .distinctData(JSON.parse(cookie.get("PCAY"))?.AcademicYear?.term)
       .then((grad) => {
         // console.log(grad);
         // return this.setState({

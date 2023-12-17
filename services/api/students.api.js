@@ -1,12 +1,14 @@
 import axios from "axios";
-const resource = "http://localhost:5000/api/schools";
+// const resource = "http://localhost:5000/api/1.0.0/schools";
+const url = process.env.NEXT_PUBLIC_URL_API;
+
 import cookie from "js-cookie";
 import useCrypto from "../cryptoJs";
 const crypto = new useCrypto();
 export default class StudentService {
   signin(data) {
     return axios
-      .post(resource + "/signin/student", data, {
+      .post(url + "/signin/student", data, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
@@ -24,12 +26,12 @@ export default class StudentService {
 
   distinctData(term) {
     return axios
-      .get(resource + "/distinct/student-subject/" + term, {
+      .get(url + "/distinct/student-subject/" + term, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(crypto.decrypt(cookie.get("TOKEN")))?.token
+            JSON.parse(crypto.decrypt(cookie.get("PTOKEN")))?.token
           }`,
         },
       })
@@ -44,12 +46,12 @@ export default class StudentService {
   }
   updatePassword(data) {
     return axios
-      .patch(resource + "/password/update/student/" + data.id, data, {
+      .patch(url + "/password/update/student/" + data.id, data, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(crypto.decrypt(cookie.get("TOKEN")))?.token
+            JSON.parse(crypto.decrypt(cookie.get("PTOKEN")))?.token
           }`,
         },
       })
